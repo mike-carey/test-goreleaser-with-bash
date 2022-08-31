@@ -21,17 +21,6 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v2
 
-      - name: 'Get go version'
-        id: goversion
-        run: |
-          set -eo pipefail
-          version="$(< .go-version)"
-          echo "::set-output name=version::$version"
-      - name: 'Setup go'
-        uses: actions/setup-go@v2
-        with:
-          go-version: ${{ steps.goversion.outputs.version }}
-
       - name: 'Run GoReleaser'
         uses: goreleaser/goreleaser-action@v2
         with:
