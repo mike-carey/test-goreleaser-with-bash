@@ -1,0 +1,44 @@
+# This is an example .goreleaser.yml file with some sane defaults.
+# Make sure to check the documentation at https://goreleaser.com
+before:
+  hooks:
+    # You may remove this if you don't use go modules.
+    # - go mod tidy
+    # you may remove this if you don't need go generate
+    # - go generate ./...
+builds:
+  -
+    # Set the builder to prebuilt
+    builder: prebuilt
+
+    # prebuilt specific options
+    prebuilt:
+      # Path must be the template path to the binaries.
+      # GoReleaser removes the `dist` folder before running, so you will likely
+      # want to put the binaries elsewhere.
+      # This field is required when using the `prebuilt` builder.
+      path: ./my-custom-script
+# archives:
+#   - replacements:
+#       darwin: Darwin
+#       linux: Linux
+#       # windows: Windows
+#       386: i386
+#       amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+# The Homebrew formula
+brews:
+  - name: test-goreleaser-with-bash
+    tap:
+      owner: mike-carey
+      name: test-goreleaser-with-bash
+    folder: Formula

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function my-custom-script() {
+  :
+}
+
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+  set -u
+
+  my-custom-script "${@:-}"
+  exit $?
+fi
